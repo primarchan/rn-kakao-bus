@@ -12,9 +12,16 @@ export default ({
   directionDescription,
   numColor,
   processedNextBusInfos,
+  NEWCOLOR,
 }) => {
   return (
-    <View style={{ flexDirection: "row", height: 75, backgroundColor: "#FFF" }}>
+    <View
+      style={{
+        flexDirection: "row",
+        height: 75,
+        backgroundColor: NEWCOLOR.WHITE_BLACK,
+      }}
+    >
       {/* 북마크 */}
       <View
         style={{
@@ -28,6 +35,7 @@ export default ({
           onPress={onPressBookmark}
           style={{ paddingHorizontal: 10 }}
           size={20}
+          NEWCOLOR={NEWCOLOR}
         />
 
         {/* 버스번호, 방향 */}
@@ -49,12 +57,17 @@ export default ({
               remainedTimeText={info.remainedTimeText}
               numOfRemainedStops={info.numOfRemainedStops}
               seatStatusText={info.seatStatusText}
+              NEWCOLOR={NEWCOLOR}
             />
           ))}
         </View>
 
         {/* 알람 아이콘 */}
-        <AlarmButton onPress={() => {}} style={{ paddingHorizontal: 15 }} />
+        <AlarmButton
+          onPress={() => {}}
+          style={{ paddingHorizontal: 15 }}
+          NEWCOLOR={NEWCOLOR}
+        />
       </View>
     </View>
   );

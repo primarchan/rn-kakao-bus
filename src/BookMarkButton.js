@@ -10,7 +10,13 @@ const useBookmark = (initialIsBookmarked) => {
   return { isBookmarked, toggleIsBookmarked };
 };
 
-export default ({ isBookmarked: isBookmarkedProp, onPress, style, size }) => {
+export default ({
+  isBookmarked: isBookmarkedProp,
+  onPress,
+  style,
+  size,
+  NEWCOLOR,
+}) => {
   const { isBookmarked, toggleIsBookmarked } = useBookmark(isBookmarkedProp);
   return (
     <TouchableOpacity
@@ -23,7 +29,7 @@ export default ({ isBookmarked: isBookmarkedProp, onPress, style, size }) => {
       <Ionicons
         name="star"
         size={size}
-        color={isBookmarked ? COLOR.YELLOW : COLOR.GRAY_1}
+        color={isBookmarked ? COLOR.YELLOW : NEWCOLOR.GRAY_1_GRAY_4}
       />
     </TouchableOpacity>
   );
