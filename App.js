@@ -1,3 +1,5 @@
+import dayjs from "dayjs";
+import { useEffect, useState } from "react";
 import { SafeAreaView, SectionList, StyleSheet, Text } from "react-native";
 
 import BusInfo from "./src/BusInfo";
@@ -8,10 +10,10 @@ import {
   getSeatStatusText,
   getSections,
 } from "./src/data";
-import dayjs from "dayjs";
 
 export default function App() {
-  const now = dayjs();
+  const [now, setNow] = useState(dayjs());
+
   const sections = getSections(busStop.buses);
 
   const renderItem = ({ item: bus }) => {
@@ -65,6 +67,17 @@ export default function App() {
       />
     );
   };
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const newNow = dayjs();
+      setNow(newNow);
+    }, 1000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>
