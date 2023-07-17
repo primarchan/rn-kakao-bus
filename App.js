@@ -1,6 +1,7 @@
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
 import { SafeAreaView, SectionList, StyleSheet, Text } from "react-native";
+import { SimpleLineIcons } from "@expo/vector-icons";
 
 import BusInfo from "./src/BusInfo";
 import {
@@ -12,11 +13,63 @@ import {
 } from "./src/data";
 import { COLOR } from "./src/color";
 import { View } from "react-native";
+import { TouchableOpacity } from "react-native";
+import Margin from "./src/Margin";
+import BookMarkButton from "./src/BookMarkButton";
+
+const busStopBookmarkSize = 20;
+const busStopBookmarkPadding = 6;
 
 export default function App() {
+  const sections = getSections(busStop.buses);
+
   const [now, setNow] = useState(dayjs());
 
-  const sections = getSections(busStop.buses);
+  const onPressBusStopBookmark = () => {};
+
+  const ListHeaderComponent = () => {
+    <SafeAreaView style={{ backgroundColor: COLOR.GRAY_1 }}>
+      {/* 뒤로가기, 홈 아이콘 */}
+      <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+        <TouchableOpacity style={{ padding: 10 }}>
+          <SimpleLineIcons name="arrow-left" size={20} color={COLOR.WHITE} />
+        </TouchableOpacity>
+        <TouchableOpacity>
+          <SimpleLineIcons name="home" size={20} color={COLOR.WHITE} />
+        </TouchableOpacity>
+      </View>
+
+      {/* 정류소 번호, 이름, 방향 */}
+      <View style={{ justifyContent: "center", alignItems: "center" }}>
+        <Margin height={10} />
+
+        <Text style={{ color: COLOR.WHITE, fontSize: 13 }}>{busStop.id}</Text>
+        <Margin height={4} />
+
+        <Text style={{ color: COLOR.WHITE, fontSize: 20 }}>{busStop.name}</Text>
+        <Margin height={4} />
+
+        <Text style={{ color: COLOR.GRAY_1, fontSize: 14 }}>
+          {busStop.directionDescription}
+        </Text>
+        <Margin height={20} />
+      </View>
+
+      {/* 북마크 */}
+      <BookMarkButton
+        size={busStopBookmarkSize}
+        isBookMarked={busStop.isBookmarked}
+        onPress={onPressBusStopBookmark}
+        style={{
+          borderWidth: 0.3,
+          borderColor: COLOR.GRAY_1,
+          borderRadius: (busStopBookmarkSize + busStopBookmarkPadding * 2) / 2,
+          padding: busStopBookmarkPadding,
+        }}
+      />
+      <Margin height={25} />
+    </SafeAreaView>;
+  };
 
   const renderSectionHeader = ({ section: { title } }) => (
     <View
@@ -98,14 +151,15 @@ export default function App() {
   }, []);
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <SectionList
         style={{ flex: 1, width: "100%" }}
         sections={sections}
+        ListHeaderComponent={ListHeaderComponent}
         renderSectionHeader={renderSectionHeader}
         renderItem={renderItem}
       />
-    </SafeAreaView>
+    </View>
   );
 }
 

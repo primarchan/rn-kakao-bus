@@ -27,6 +27,7 @@ export default ({
           isBookMarked={isBookMarked}
           onPress={onPressBookMark}
           style={{ paddingHorizontal: 10 }}
+          size={20}
         />
         {/* 버스번호, 방향 */}
         <View style={{ flex: 1 }}>
