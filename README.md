@@ -9,6 +9,10 @@
 - `npx expo install @react-native-async-storage/async-storage`
 - ` sudo npm install --global expo-cli`
 
+## 참고 문서
+
+- RefreshControl [관련 링크](https://docs.expo.dev/versions/latest/react-native/refreshcontrol)
+
 ## 산출물
 
 ![result1](/content/result1.PNG)

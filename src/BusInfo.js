@@ -7,34 +7,33 @@ import NextBusInfo from "./NextBusInfo";
 
 export default ({
   isBookmarked,
-  onPressBookMark,
+  onPressBookmark,
   num,
   directionDescription,
   numColor,
   processedNextBusInfos,
 }) => {
   return (
-    <View
-      style={{ flexDirection: "row", height: 75, backgroundColor: COLOR.WHITE }}
-    >
+    <View style={{ flexDirection: "row", height: 75, backgroundColor: "#FFF" }}>
       {/* 북마크 */}
       <View
         style={{
-          flex: 1,
+          flex: 0.85,
           flexDirection: "row",
           alignItems: "center",
         }}
       >
         <BookmarkButton
           isBookmarked={isBookmarked}
-          onPress={onPressBookMark}
+          onPress={onPressBookmark}
           style={{ paddingHorizontal: 10 }}
           size={20}
         />
+
         {/* 버스번호, 방향 */}
         <View style={{ flex: 1 }}>
           <Text style={{ color: numColor, fontSize: 20 }}>{num}</Text>
-          <Text style={{ color: COLOR.GRAY_3, fontSize: 13 }}>
+          <Text style={{ color: COLOR.GRAY_3, fontSize: 13, marginRight: 3 }}>
             {directionDescription} 방향
           </Text>
         </View>
@@ -53,6 +52,7 @@ export default ({
             />
           ))}
         </View>
+
         {/* 알람 아이콘 */}
         <AlarmButton onPress={() => {}} style={{ paddingHorizontal: 15 }} />
       </View>
