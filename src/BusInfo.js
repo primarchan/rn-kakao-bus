@@ -6,7 +6,7 @@ import BookmarkButton from "./BookmarkButton";
 import NextBusInfo from "./NextBusInfo";
 
 export default ({
-  isBookMarked,
+  isBookmarked,
   onPressBookMark,
   num,
   directionDescription,
@@ -14,7 +14,9 @@ export default ({
   processedNextBusInfos,
 }) => {
   return (
-    <View style={{ flexDirection: "row", height: 75 }}>
+    <View
+      style={{ flexDirection: "row", height: 75, backgroundColor: COLOR.WHITE }}
+    >
       {/* 북마크 */}
       <View
         style={{
@@ -24,7 +26,7 @@ export default ({
         }}
       >
         <BookmarkButton
-          isBookMarked={isBookMarked}
+          isBookmarked={isBookmarked}
           onPress={onPressBookMark}
           style={{ paddingHorizontal: 10 }}
           size={20}
