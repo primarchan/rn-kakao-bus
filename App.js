@@ -1,9 +1,17 @@
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
-import { SafeAreaView, SectionList, StyleSheet, Text } from "react-native";
+import {
+  SafeAreaView,
+  SectionList,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { SimpleLineIcons } from "@expo/vector-icons";
 
 import BusInfo from "./src/BusInfo";
+import { COLOR } from "./src/color";
 import {
   busStop,
   getBusNumColorByType,
@@ -11,30 +19,32 @@ import {
   getSeatStatusText,
   getSections,
 } from "./src/data";
-import { COLOR } from "./src/color";
-import { View } from "react-native";
-import { TouchableOpacity } from "react-native";
 import Margin from "./src/Margin";
-import BookMarkButton from "./src/BookMarkButton";
+import BookmarkButton from "./src/BookmarkButton";
 
 const busStopBookmarkSize = 20;
 const busStopBookmarkPadding = 6;
 
 export default function App() {
   const sections = getSections(busStop.buses);
-
   const [now, setNow] = useState(dayjs());
 
-  const onPressBusStopBookmark = () => {};
-
-  const ListHeaderComponent = () => {
-    <SafeAreaView style={{ backgroundColor: COLOR.GRAY_1 }}>
+  const onPressBusStopBookmark = () => {
+    // TODO
+  };
+  const ListHeaderComponent = () => (
+    <SafeAreaView
+      style={{
+        backgroundColor: COLOR.GRAY_3,
+        height: 250,
+      }}
+    >
       {/* 뒤로가기, 홈 아이콘 */}
       <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
         <TouchableOpacity style={{ padding: 10 }}>
           <SimpleLineIcons name="arrow-left" size={20} color={COLOR.WHITE} />
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity style={{ padding: 10 }}>
           <SimpleLineIcons name="home" size={20} color={COLOR.WHITE} />
         </TouchableOpacity>
       </View>
@@ -53,24 +63,24 @@ export default function App() {
           {busStop.directionDescription}
         </Text>
         <Margin height={20} />
+
+        {/* 북마크 */}
+        <BookmarkButton
+          size={busStopBookmarkSize} // 25 + 5 + 5
+          isBookmarked={busStop.isBookmarked}
+          onPress={onPressBusStopBookmark}
+          style={{
+            borderWidth: 0.3,
+            borderColor: COLOR.GRAY_1,
+            borderRadius:
+              (busStopBookmarkSize + busStopBookmarkPadding * 2) / 2,
+            padding: busStopBookmarkPadding,
+          }}
+        />
+        <Margin height={25} />
       </View>
-
-      {/* 북마크 */}
-      <BookMarkButton
-        size={busStopBookmarkSize}
-        isBookMarked={busStop.isBookmarked}
-        onPress={onPressBusStopBookmark}
-        style={{
-          borderWidth: 0.3,
-          borderColor: COLOR.GRAY_1,
-          borderRadius: (busStopBookmarkSize + busStopBookmarkPadding * 2) / 2,
-          padding: busStopBookmarkPadding,
-        }}
-      />
-      <Margin height={25} />
-    </SafeAreaView>;
-  };
-
+    </SafeAreaView>
+  );
   const renderSectionHeader = ({ section: { title } }) => (
     <View
       style={{
@@ -86,7 +96,6 @@ export default function App() {
       <Text style={{ fontSize: 12, color: COLOR.GRAY_4 }}>{title}</Text>
     </View>
   );
-
   const renderItem = ({ item: bus }) => {
     const numColor = getBusNumColorByType(bus.type);
 
@@ -129,8 +138,8 @@ export default function App() {
 
     return (
       <BusInfo
-        isBookMarked={bus.isBookMarked}
-        onPressBookMark={() => {}} // TODO
+        isBookmarked={bus.isBookmarked}
+        onPressBookmark={() => {}} // TODO
         num={bus.num}
         directionDescription={bus.directionDescription}
         numColor={numColor}
@@ -138,6 +147,10 @@ export default function App() {
       />
     );
   };
+  const ItemSeparatorComponent = () => (
+    <View style={{ width: "100%", height: 1, backgroundColor: COLOR.GRAY_1 }} />
+  );
+  const ListFooterComponent = () => <Margin height={30} />;
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -158,6 +171,8 @@ export default function App() {
         ListHeaderComponent={ListHeaderComponent}
         renderSectionHeader={renderSectionHeader}
         renderItem={renderItem}
+        ItemSeparatorComponent={ItemSeparatorComponent}
+        ListFooterComponent={ListFooterComponent}
       />
     </View>
   );

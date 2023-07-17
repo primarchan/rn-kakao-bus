@@ -2,7 +2,7 @@ import { View, Text } from "react-native";
 
 import { COLOR } from "./color";
 import AlarmButton from "./AlarmButton";
-import BookMarkButton from "./BookMarkButton";
+import BookmarkButton from "./BookmarkButton";
 import NextBusInfo from "./NextBusInfo";
 
 export default ({
@@ -14,7 +14,7 @@ export default ({
   processedNextBusInfos,
 }) => {
   return (
-    <View style={{ flexDirection: "row" }}>
+    <View style={{ flexDirection: "row", height: 75 }}>
       {/* 북마크 */}
       <View
         style={{
@@ -23,7 +23,7 @@ export default ({
           alignItems: "center",
         }}
       >
-        <BookMarkButton
+        <BookmarkButton
           isBookMarked={isBookMarked}
           onPress={onPressBookMark}
           style={{ paddingHorizontal: 10 }}
