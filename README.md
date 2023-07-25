@@ -1,6 +1,6 @@
 # React-Native 기반 카카오버스 클론코딩
 
-## 커맨드
+## Installation
 
 - `npx create-expo-app {프로젝트명}`
 - `npx expo start`
@@ -9,11 +9,11 @@
 - `npx expo install @react-native-async-storage/async-storage`
 - ` sudo npm install --global expo-cli`
 
-## 참고 문서
+## Reference
 
 - RefreshControl [관련 링크](https://docs.expo.dev/versions/latest/react-native/refreshcontrol)
 
-## 산출물
+## Result
 
 <p align="center">
 <img src="/content/result1.PNG" width="50%" height="50%"/>
