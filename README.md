@@ -15,5 +15,7 @@
 
 ## 산출물
 
-![result1](/content/result1.PNG)
-![result2](/content/result2.PNG)
+<p align="center">
+<img src="/content/result1.PNG" width="50%" height="50%"/>
+<img src="/content/result2.PNG" width="50%" height="50%"/>
+</p>
